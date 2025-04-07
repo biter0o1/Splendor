@@ -12,11 +12,11 @@ class Player {
 	};
 
 	tokens = {
-		[TokenType.WHITE]: 0,
-		[TokenType.BLUE]: 0,
-		[TokenType.GREEN]: 0,
-		[TokenType.RED]: 0,
-		[TokenType.BLACK]: 0,
+		[TokenType.WHITE]: 4,
+		[TokenType.BLUE]: 4,
+		[TokenType.GREEN]: 4,
+		[TokenType.RED]: 4,
+		[TokenType.BLACK]: 4,
 	};
 
 	cardsInHand = [];

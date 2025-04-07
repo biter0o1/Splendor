@@ -26,6 +26,7 @@ class Turn {
 		this.resetItems();
 		this.setPlayer(this.playerManager.getNextPlayer());
 		this.refreshCardCanPurchase();
+		this.refreshTokenCanPurchase();
 	}
 
 	setPlayer(player) {
@@ -156,6 +157,18 @@ class Turn {
 					card.element.classList.remove('can-purchase');
 				}
 			});
+		});
+	}
+
+	refreshTokenCanPurchase() {
+		const tokens = document.querySelectorAll('.token');
+		tokens.forEach(token => {
+			if (this.canAddItem(new Token(Date.now(), token.classList[1]))) {
+				//Date.now because we need unique id, its miliseconds, its no matter for this object
+				token.classList.add('can-purchase');
+			} else {
+				token.classList.remove('can-purchase');
+			}
 		});
 	}
 }

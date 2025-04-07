@@ -28,6 +28,7 @@ class TokenManager {
 	}
 
 	displayTokens() {
+		this.tokenArea.innerHTML = '';
 		Object.entries(this.tokens).forEach(([type, value]) => {
 			const tokenDiv = document.createElement('div');
 			tokenDiv.classList.add('token', type);
@@ -48,6 +49,9 @@ class TokenManager {
 
 			this.tokenArea.appendChild(tokenDiv);
 		});
+
+		this.turn.refreshTokenCanPurchase();
+		this.turn.refreshCardCanPurchase();
 	}
 
 	displayTokensCount() {
@@ -88,11 +92,13 @@ class TokenManager {
 
 	addToken(type) {
 		this.tokens[type]++;
+		this.displayTokens();
 		this.displayTokensCount();
 	}
 
 	removeToken(type) {
 		this.tokens[type]--;
+		this.displayTokens();
 		this.displayTokensCount();
 	}
 }
