@@ -25,6 +25,7 @@ class Turn {
 		this.player.collectReward(this.items);
 		this.resetItems();
 		this.setPlayer(this.playerManager.getNextPlayer());
+		this.refreshCardCanPurchase();
 	}
 
 	setPlayer(player) {
@@ -40,6 +41,10 @@ class Turn {
 	removeItem(itemToRemove) {
 		this.items = this.items.filter(item => item.id !== itemToRemove.id);
 		this.reloadItems();
+	}
+
+	setCardsOnBoard(cards) {
+		this.cardsOnBoard = cards;
 	}
 
 	resetItems() {
@@ -140,6 +145,16 @@ class Turn {
 		}
 
 		return true;
+	}
+
+	refreshCardCanPurchase() {
+		Object.values(this.cardsOnBoard).forEach(cardsByLvl => {
+			cardsByLvl.forEach(card => {
+				if (this.canPlayerPurchaseCard(card)) {
+					card.element.classList.add('can-purchase');
+				}
+			});
+		});
 	}
 }
 

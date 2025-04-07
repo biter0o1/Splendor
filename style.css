@@ -259,13 +259,13 @@ body {
 	width: 90%;
 }
 
-.can-purchase {
+.cards-area .can-purchase {
     border: 3px solid rgba(76, 175, 80, 0.33);
     box-shadow: 0 0 20px 5px rgba(76, 175, 80); 
     transition: all 0.3s ease;
 }
 
-.can-purchase:hover {
+.cards-area .can-purchase:hover {
     transform: scale(1.05);
     box-shadow: 0 0 30px 10px rgba(76, 175, 80);  
 }

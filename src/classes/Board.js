@@ -12,6 +12,7 @@ class Board {
 
 	constructor() {
 		this.turn = new Turn(); //Singleton
+		this.turn.setCardsOnBoard(this.cards);
 		this.init();
 	}
 
@@ -49,11 +50,9 @@ class Board {
 			cardsByLvl.forEach(card => {
 				card.display();
 				card.addListener(this);
-				// console.log(this.turn.canPlayerPurchaseCard(card));
-				
-				// if(this.turn.canPlayerPurchaseCard(card)){
-				// 	card.element.classList.add('can-purchase');
-				// }
+				if(this.turn.canPlayerPurchaseCard(card)){
+					card.element.classList.add('can-purchase');
+				}
 			});
 		});
 	}
