@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <script type="module" src="src/index.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div id="turn" class="turn"></div>
+        </div>
+        <div class="board">
+            <div class="top-section">
+                <div class="extra-cards"></div>
+                <div id="token-area" class="token-area"></div>
+            </div>
+
+            <div class="bottom-section">
+                <div class="deck">
+                    <div id="deck-lvl3" class="card revers lvl3">
+                        <span>SPLENDOR</span>
+                        <div class="count"></div>
+                    </div>
+                    <div id="deck-lvl2" class="card revers lvl2">
+                        <span>SPLENDOR</span>
+                        <div class="count"></div>
+                    </div>
+                    <div id="deck-lvl1" class="card revers lvl1">
+                        <span>SPLENDOR</span>
+                        <div class="count"></div>
+                    </div>
+                </div>
+                <div class="cards-area">
+                    <div class="cards-area-lvl3"></div>
+                    <div class="cards-area-lvl2"></div>
+                    <div class="cards-area-lvl1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="right-panel">
+            <div id="player-list" class="player-list"></div>
+        </div>
+    </div>
+
+    <!-- TEMPLATES -->
+    <template id="card-template">
+        <div class="card">
+            <div class="points"></div>
+            <div class="gem"><i class="fa-regular fa-gem"></i></div>
+            <div class="cost-area">
+            </div>
+        </div>
+    </template>
+
+    <template id="player-template">
+        <div class="player-stats">
+            <div class="player-text">
+                <h1 class="player-name"></h1>
+                <span class="player-victory-points blue"></span>
+            </div>
+            <div class="player-tokens"></div>
+            <div class="player-bonuses"></div>
+            <div class="player-cards-in-hand"></div>
+        </div>
+    </template>
+    <!-- TEMPLATES end -->
+
+    <script src="https://kit.fontawesome.com/e1fc8e90d1.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

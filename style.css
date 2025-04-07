@@ -1,0 +1,416 @@
+* {
+	font-family: "Roboto Mono", monospace;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+
+body {
+	background-color: lightblue;
+	font-size: 16px;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+    height: 100vh;
+}
+
+.left-panel {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 20%;
+	height: 100%;
+	/* background-color: #1c9131; */
+	flex-grow: 1;
+}
+
+.right-panel {
+	width: 20%;
+	height: 100%;
+	/* background-color: #1c9131; */
+	flex-grow: 1;
+}
+
+.player-list {
+	display: flex;
+	flex-direction: column;
+	justify-content:space-around;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	position: relative;
+}
+
+.player-stats {
+	display: flex;
+	flex-direction: column;
+	background-color: #7a7fb5;
+}
+
+.player-text {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.player-name {
+	display: inline;
+	font-size: 3rem;
+  }
+  
+.player-victory-points {
+	font-size: 3rem;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 10%;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+.player-tokens {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.player-token {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.player-bonuses {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.player-bonus {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.turn {
+	width: 100%;
+	height: 20%;
+	background-color: #7a7fb5;
+	text-align: center;
+	position: relative;
+	display: flex;
+    flex-direction: column;
+}
+
+.turn-items {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+.finish-turn-btn {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: 20%;
+    height: 20%;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.finish-turn-btn:hover {
+    background: linear-gradient(135deg, #66BB6A, #388E3C);
+    transform: scale(1.1);
+}
+
+.finish-turn-btn:active {
+    background: linear-gradient(135deg, #388E3C, #1B5E20);
+    transform: scale(0.90);
+}
+
+.board {
+	display: flex;
+	flex-direction: column;
+	background-color: azure;
+	width: 60%;
+	max-width: 1200px;
+	height: 100%;
+	border-radius: 5px;
+	/* margin: auto; */
+}
+
+.bottom-section {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.top-section {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	/* background-color: greenyellow; */
+	height: 20%;
+}
+
+.token-area {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 2%;
+	background-color: lightgrey;
+	width: 50%;
+	padding: 1%;
+}
+
+.token {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	aspect-ratio: 1/1;
+	width: clamp(50px, 4vw, 80px);
+	min-width: 60px;
+	border-radius: 50%;
+	font-size: 3rem;
+}
+
+
+.token-count {
+	position: absolute;
+	bottom: -3%;
+	right: -3%;
+	background-color: yellowgreen;
+	border-radius: 50%;
+	font-size: 0.5em;
+	color: black;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 1.2em;
+	aspect-ratio: 1/1;
+}
+
+.deck {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	background-color: lightgoldenrodyellow;
+	width: clamp(150px, 20%, 400px);
+	height: 100%;
+}
+
+.cards-area{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	background-color: rgb(86, 8, 8);
+	width: 100%;
+	height: 100%;
+}
+
+.cards-area-lvl3, .cards-area-lvl2, .cards-area-lvl1{
+	display: flex;
+	justify-content: space-around;
+}
+
+.card {
+	position: relative;
+	background-color: lightblue;
+	width: clamp(150px, 20%, 400px);
+	aspect-ratio: 5 / 6;
+	border-radius: 5px;
+	border: 3px solid black;
+}
+
+.deck .card {
+	width: 90%;
+}
+
+.can-purchase {
+    border: 3px solid rgba(76, 175, 80, 0.33);
+    box-shadow: 0 0 20px 5px rgba(76, 175, 80); 
+    transition: all 0.3s ease;
+}
+
+.can-purchase:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px 10px rgba(76, 175, 80);  
+}
+
+.revers {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+}
+
+.count {
+	position: absolute;
+	top: -5%;
+	left: -5%;
+	background-color: yellowgreen;
+	padding: 2%;;
+	border-radius: 50%;
+}
+
+.points{
+	font-size: 3rem;
+	position: absolute;
+	left: 5%;
+}
+
+.gem {
+	font-size: 3rem;
+	position: absolute;
+	top: 3%;
+	right: 5%;
+	border-radius: 50%;
+}
+
+.points, .gem {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.cost-area {
+	display: flex;
+	justify-content: end;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	/* background-color: blueviolet; */
+	/* width: 20%; */
+	/* padding: 2%; */
+	gap: 3px;
+	margin: auto 3%;
+	bottom: 5%;
+}
+
+.cost {
+	display: flex;
+	justify-content: center;
+	font-size: 1.4rem;
+	margin: 1% auto;
+	padding:  auto 5px;
+	border-radius: 50%;
+	aspect-ratio: 1/1;
+}
+
+
+.lvl3 {
+	background-color: #8c4fd1;
+}
+
+.lvl2 {
+	background-color: #8fa832;
+}
+
+.lvl1 {
+	background-color: #1c9131;
+}
+
+.red {
+    background-color: #d32f2f;
+	color: white;
+}
+
+.green {
+    background-color: #5ba260;
+	color: black;
+}
+
+.blue {
+    background-color: #1976d2;
+	color: white;
+}
+
+.white {
+    background-color: #ffffff;
+	color: black;
+}
+
+.gold {
+    background-color: #fbc02d;
+	color: black;
+}
+
+.black {
+    background-color: #392f2f;
+	color: white;
+}
+
+
+@media (max-width: 1200px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 992px) {
+    html {
+        font-size: 14px;
+    }
+
+	.card{
+		aspect-ratio: 3/4;
+	}
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 12px;
+    }
+
+	.card{
+		aspect-ratio: 2/3;
+	}
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 10px;
+    }
+
+	.card{
+		aspect-ratio: 1/3;
+	}
+
+}
+
+@media (max-width: 400px) {
+    html {
+        font-size: 9px;
+    }
+}

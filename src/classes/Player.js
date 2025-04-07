@@ -1,0 +1,120 @@
+import TokenType from './TokenType.js';
+import Card from './Card.js';
+import Token from './Token.js';
+
+class Player {
+	bonuses = {
+		[TokenType.WHITE]: 0,
+		[TokenType.BLUE]: 0,
+		[TokenType.GREEN]: 0,
+		[TokenType.RED]: 0,
+		[TokenType.BLACK]: 0,
+	};
+
+	tokens = {
+		[TokenType.WHITE]: 0,
+		[TokenType.BLUE]: 0,
+		[TokenType.GREEN]: 0,
+		[TokenType.RED]: 0,
+		[TokenType.BLACK]: 0,
+	};
+
+	cardsInHand = [];
+
+	victoryPoint = 0;
+
+	constructor(name) {
+		this.name = name;
+
+		this.generateElement();
+	}
+
+	collectReward(items) {
+		items.forEach(item => {
+			if (item instanceof Card) {
+				this.bonuses[item.gemType] += 1;
+				this.victoryPoint += item.victoryPoint;
+			} else if (item instanceof Token) {
+				this.tokens[item.type] += 1;
+			}
+		});
+
+		this.updateElement();
+	}
+
+	updateElement() {
+		this.updateBonuses();
+		this.updateTokens();
+		this.updateVictoryPoints();
+	}
+
+	generateElement() {
+		const template = document.querySelector('#player-template');
+		this.element = template.content.cloneNode(true).querySelector('.player-stats');
+
+		this.element.querySelector('.player-name').textContent = this.name;
+		this.element.querySelector('.player-victory-points').textContent = this.victoryPoint;
+
+		const bonuses = this.element.querySelector('.player-bonuses');
+		this.generateBonuses(bonuses);
+
+		const tokens = this.element.querySelector('.player-tokens');
+		this.generateTokens(tokens);
+
+		const cardsInHand = this.element.querySelector('.player-cards-in-hand');
+		this.generateCardsInHand(cardsInHand);
+
+		const parentList = document.querySelector('#player-list');
+		parentList.appendChild(this.element);
+	}
+
+	generateBonuses(bonusesElement) {
+		Object.entries(this.bonuses).forEach(([bonus, value]) => {
+			const div = document.createElement('div');
+			div.classList.add('player-bonus', bonus);
+			div.textContent = `${value}`;
+			bonusesElement.appendChild(div);
+		});
+	}
+
+	updateBonuses() {
+		const bonuses = this.element.querySelector('.player-bonuses');
+		bonuses.innerHTML = '';
+		this.generateBonuses(bonuses);
+	}
+
+	generateTokens(tokensElement) {
+		Object.entries(this.tokens).forEach(([token, value]) => {
+			const div = document.createElement('div');
+			div.classList.add('player-token', token);
+			div.textContent = `${value}`;
+			tokensElement.appendChild(div);
+		});
+	}
+
+	updateTokens() {
+		const tokens = this.element.querySelector('.player-tokens');
+		tokens.innerHTML = '';
+		this.generateTokens(tokens);
+	}
+
+	updateVictoryPoints() {
+		const victoryPoints = this.element.querySelector('.player-victory-points');
+		if (this.victoryPoint >= 5 && this.victoryPoint < 10) {
+            victoryPoints.classList.remove('blue');
+			victoryPoints.classList.add('gold');
+		} else if (this.victoryPoint >= 10) {
+            victoryPoints.classList.remove('gold');
+			victoryPoints.classList.add('green');
+		}
+		victoryPoints.textContent = this.victoryPoint;
+	}
+
+	generateCardsInHand(cardInHandElement) {
+		this.cardsInHand.forEach(card => {
+			cardInHandElement.appendChild(card.element);
+		});
+	}
+}
+
+export default Player;
