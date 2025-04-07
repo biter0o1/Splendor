@@ -50,8 +50,10 @@ class Board {
 			cardsByLvl.forEach(card => {
 				card.display();
 				card.addListener(this);
-				if(this.turn.canPlayerPurchaseCard(card)){
+				if(this.turn.canAddItem(card)){
 					card.element.classList.add('can-purchase');
+				} else {
+					card.element.classList.remove('can-purchase');
 				}
 			});
 		});

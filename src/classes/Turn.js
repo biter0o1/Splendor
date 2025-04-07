@@ -150,8 +150,10 @@ class Turn {
 	refreshCardCanPurchase() {
 		Object.values(this.cardsOnBoard).forEach(cardsByLvl => {
 			cardsByLvl.forEach(card => {
-				if (this.canPlayerPurchaseCard(card)) {
+				if (this.canAddItem(card)) {
 					card.element.classList.add('can-purchase');
+				} else {
+					card.element.classList.remove('can-purchase');
 				}
 			});
 		});
