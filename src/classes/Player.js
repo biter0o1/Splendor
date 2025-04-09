@@ -7,7 +7,7 @@ class Player {
 		[TokenType.WHITE]: 0,
 		[TokenType.BLUE]: 0,
 		[TokenType.GREEN]: 0,
-		[TokenType.RED]: 0,
+		[TokenType.RED]: 1,
 		[TokenType.BLACK]: 0,
 	};
 

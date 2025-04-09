@@ -28,14 +28,12 @@ body {
 	flex-direction: column;
 	width: 20%;
 	height: 100%;
-	/* background-color: #1c9131; */
 	flex-grow: 1;
 }
 
 .right-panel {
 	width: 20%;
 	height: 100%;
-	/* background-color: #1c9131; */
 	flex-grow: 1;
 }
 
@@ -264,6 +262,11 @@ body {
 	width: 90%;
 }
 
+.new-added-card {
+	opacity: 0;
+	animation: card-entry 1s ease-in-out forwards;
+}
+
 .cards-area .can-purchase, .token-area .can-purchase {
     border: 3px solid rgba(76, 175, 80, 0.33);
     box-shadow: 0 0 20px 5px rgba(76, 175, 80); 
@@ -417,5 +420,20 @@ body {
 @media (max-width: 400px) {
     html {
         font-size: 9px;
+    }
+}
+
+@keyframes card-entry {
+    0% {
+        transform: translate(-50vw, 0);
+    }
+	50% {
+        transform: translate(0, 0);
+		scale: 1.2;
+		opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0);
+		opacity: 1;
     }
 }

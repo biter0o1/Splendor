@@ -2,6 +2,7 @@ import Card from './Card.js';
 import Token from './Token.js';
 import TokenType from './TokenType.js';
 import PlayerManager from './PlayerManager.js';
+import Board from './Board.js';
 
 class Turn {
 	static _instance = null;
@@ -22,11 +23,16 @@ class Turn {
 	finishTurn() {
 		if (!this.finishable()) return;
 
+		this.placeCards();
 		this.player.collectReward(this.items);
 		this.resetItems();
 		this.setPlayer(this.playerManager.getNextPlayer());
 		this.refreshCardCanPurchase();
 		this.refreshTokenCanPurchase();
+	}
+
+	setMethodTopPlaceCardOnBoard(placeCards) {
+		this.placeCards = placeCards;
 	}
 
 	setPlayer(player) {
@@ -73,7 +79,7 @@ class Turn {
 
 		turnBtn.addEventListener('click', () => this.finishTurn());
 
-		if(this.finishable()){
+		if (this.finishable()) {
 			turnBtn.classList.add('finishable');
 		}
 
@@ -164,7 +170,8 @@ class Turn {
 
 	canPlayerPurchaseCard(card) {
 		for (let [type, value] of Object.entries(card.cost)) {
-			if (this.player.tokens[type] < value) {
+			let playerTokensAndBonuses = this.player.tokens[type] + this.player.bonuses[type];
+			if (playerTokensAndBonuses < value) {
 				return false;
 			}
 		}

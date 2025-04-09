@@ -13,6 +13,7 @@ class Board {
 	constructor() {
 		this.turn = new Turn(); //Singleton
 		this.turn.setCardsOnBoard(this.cards);
+		this.turn.setMethodTopPlaceCardOnBoard(this.placeCards.bind(this));
 		this.init();
 	}
 
@@ -35,6 +36,7 @@ class Board {
 			while (this.cards[`lvl${lvl}`].length < Config.CARDS_MAX_ON_BOARD_PER_LEVEL) {
 				if (cardsByLevel.length > 0) {
 					const cardPoped = cardsByLevel.pop();
+					cardPoped.isNew = true;
 					this.cards[`lvl${lvl}`].push(cardPoped);
 				} else {
 					break;

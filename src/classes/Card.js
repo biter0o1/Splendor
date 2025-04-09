@@ -29,6 +29,17 @@ class Card {
 			costDiv.textContent = `${cost}`;
 			costArea.appendChild(costDiv);
 		});
+		
+		if(this.isNew){
+			this.element.classList.add('new-added-card');
+			const randomDelay = Math.random() * 0.3;
+
+			this.element.style.animationDelay = `${randomDelay}s`;
+		} else {
+			this.element.classList.remove('new-added-card');
+		}
+
+		this.isNew = false;
 
 		this.firstParent = document.querySelector(`.cards-area-lvl${this.lvl}`);
 		this.firstParent.appendChild(this.element);
@@ -39,10 +50,13 @@ class Card {
 		const handleCardClick = () => {
 			if (this.element.parentElement === this.firstParent) {
 				if (turn.canAddItem(this)) {
+					this.element.classList.remove('new-added-card');
 					turn.addItem(this);
 					board.removeCard(this);
 				}
 			} else {
+				this.element.classList.add('new-added-card');
+				this.isNew = true;
 				turn.removeItem(this);
 				board.addCard(this);
 			}
