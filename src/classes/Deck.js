@@ -11,9 +11,10 @@ class Deck {
 	};
 
 	async init() {
-        await this.loadData();
+		await this.loadData();
+		this.shuffle();
 		this.separateCardsByLevel();
-        this.displayAllDeckCount();
+		this.displayAllDeckCount();
 	}
 
 	async loadData() {
@@ -39,9 +40,9 @@ class Deck {
 	}
 
 	separateCardsByLevel() {
-        for(let lvl = 1; lvl <= Config.CARD_MAX_LEVEL; lvl++){
-            this.cardsByLevel[`lvl${lvl}`] = this.cards.filter(card => card.lvl === lvl);
-        }
+		for (let lvl = 1; lvl <= Config.CARD_MAX_LEVEL; lvl++) {
+			this.cardsByLevel[`lvl${lvl}`] = this.cards.filter(card => card.lvl === lvl);
+		}
 	}
 
 	displayDeckCountByLevel(lvl) {
@@ -49,11 +50,18 @@ class Deck {
 		deckLvl3.querySelector('.count').textContent = this.cardsByLevel[`lvl${lvl}`].length;
 	}
 
-    displayAllDeckCount(){
-        for(let lvl = 1; lvl <= Config.CARD_MAX_LEVEL; lvl++){
-            this.displayDeckCountByLevel(lvl);
-        }
-    }
+	displayAllDeckCount() {
+		for (let lvl = 1; lvl <= Config.CARD_MAX_LEVEL; lvl++) {
+			this.displayDeckCountByLevel(lvl);
+		}
+	}
+
+	shuffle() {
+		for (let i = this.cards.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+		}
+	}
 }
 
 export default Deck;
