@@ -137,7 +137,7 @@ body {
     bottom: 1rem;
     width: 20%;
     height: 20%;
-    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    background: linear-gradient(135deg, #F9A825, #F57F17);
     color: white;
     font-size: 1.2rem;
     font-weight: bold;
@@ -145,17 +145,22 @@ body {
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s, background 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .finish-turn-btn:hover {
-    background: linear-gradient(135deg, #66BB6A, #388E3C);
+    background: linear-gradient(135deg, #FBC02D, #F57F17);
     transform: scale(1.1);
 }
 
-.finish-turn-btn:active {
-    background: linear-gradient(135deg, #388E3C, #1B5E20);
-    transform: scale(0.90);
+.finish-turn-btn.finishable {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    box-shadow: 0 0 20px 10px rgba(76, 175, 80, 0.7);
+    transition: all 0.3s ease;
+}
+
+.finish-turn-btn.finishable:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px 15px rgba(76, 175, 80, 0.9);
 }
 
 .board {

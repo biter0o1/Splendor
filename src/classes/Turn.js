@@ -73,15 +73,39 @@ class Turn {
 
 		turnBtn.addEventListener('click', () => this.finishTurn());
 
+		if(this.finishable()){
+			turnBtn.classList.add('finishable');
+		}
+
 		element.appendChild(turnText);
 		element.appendChild(turnItems);
 		element.appendChild(turnBtn);
 	}
 
 	finishable() {
-		console.log('check if turn can be ended');
+		if (this.items.some(item => item instanceof Card)) {
+			return true;
+		}
 
-		return true;
+		const tokenCount = this.items.filter(item => item instanceof Token).length;
+
+		const duplicates = this.items.filter((ii, index, self) => self.filter(i => i.type === ii.type).length === 2);
+
+		const goldTokenCount = this.items.some(item => item.type === TokenType.GOLD);
+
+		if (tokenCount === 2 && duplicates.length === 2) {
+			return true;
+		}
+
+		if (tokenCount === 3 && duplicates.length === 0) {
+			return true;
+		}
+
+		if (tokenCount === 1 && goldTokenCount) {
+			return true;
+		}
+
+		return false;
 	}
 
 	canAddItem(item) {
