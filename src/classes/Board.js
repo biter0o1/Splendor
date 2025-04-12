@@ -54,8 +54,8 @@ class Board {
 				card.addListener(this);
 			});
 		});
-		this.turn.refreshCardCanPurchase();
-		this.turn.refreshTokenCanPurchase();
+		this.turn.refresh();
+
 	}
 
 	addCard(card) {

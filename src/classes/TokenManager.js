@@ -50,8 +50,7 @@ class TokenManager {
 			this.tokenArea.appendChild(tokenDiv);
 		});
 
-		this.turn.refreshTokenCanPurchase();
-		this.turn.refreshCardCanPurchase();
+		this.turn.refresh();
 	}
 
 	displayTokensCount() {

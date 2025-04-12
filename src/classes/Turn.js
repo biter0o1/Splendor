@@ -26,9 +26,8 @@ class Turn {
 		this.placeCards();
 		this.player.collectReward(this.items);
 		this.resetItems();
+		this.refresh();
 		this.setPlayer(this.playerManager.getNextPlayer());
-		this.refreshCardCanPurchase();
-		this.refreshTokenCanPurchase();
 	}
 
 	setMethodTopPlaceCardOnBoard(placeCards) {
@@ -36,7 +35,9 @@ class Turn {
 	}
 
 	setPlayer(player) {
+		this.player?.element.classList.remove('active')
 		this.player = player;
+		this.player.element.classList.add('active')
 		this.reloadItems();
 	}
 
@@ -127,6 +128,12 @@ class Turn {
 				return false;
 			}
 
+			if(item.addToHand){
+				if(this.player.cardsInHand.length < 3){
+					return true;
+				}
+			}
+
 			if (!this.canPlayerPurchaseCard(item)) {
 				return false;
 			}
@@ -169,26 +176,37 @@ class Turn {
 	}
 
 	canPlayerPurchaseCard(card) {
+		let ret = true;
 		for (let [type, value] of Object.entries(card.cost)) {
 			let playerTokensAndBonuses = this.player.tokens[type] + this.player.bonuses[type];
 			if (playerTokensAndBonuses < value) {
-				return false;
+				ret = false;
 			}
 		}
 
-		return true;
+		return ret;
 	}
 
 	refreshCardCanPurchase() {
 		Object.values(this.cardsOnBoard).forEach(cardsByLvl => {
 			cardsByLvl.forEach(card => {
-				if (this.canAddItem(card)) {
+				if (this.canAddItem(card) && !card.addToHand) {
 					card.element.classList.add('can-purchase');
 				} else {
 					card.element.classList.remove('can-purchase');
 				}
 			});
 		});
+	}
+
+	refreshCardCanPurchaseInHand() {
+		Object.values(this.player.cardsInHand).forEach(card => {
+				if (this.canPlayerPurchaseCard(card)) {
+					card.element.classList.add('can-purchase');
+				} else {
+					card.element.classList.remove('can-purchase');
+				}
+			});
 	}
 
 	refreshTokenCanPurchase() {
@@ -201,6 +219,12 @@ class Turn {
 				token.classList.remove('can-purchase');
 			}
 		});
+	}
+
+	refresh(){
+		this.refreshCardCanPurchase();
+		this.refreshCardCanPurchaseInHand();
+		this.refreshTokenCanPurchase();
 	}
 }
 

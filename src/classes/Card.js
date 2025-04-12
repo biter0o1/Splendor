@@ -47,14 +47,16 @@ class Card {
 
 	addListener(board) {
 		const turn = new Turn();
-		const handleCardClick = () => {
+		this._handleCardClick = () => {
 			if (this.element.parentElement === this.firstParent) {
-				if (!turn.canAddItem(this)) {
+				if (!turn.canPlayerPurchaseCard(this)) {
 					this.addToHand = true;
 				}
-				this.element.classList.remove('new-added-card');
-				turn.addItem(this);
-				board.removeCard(this);
+				if (turn.canAddItem(this)) {
+					this.element.classList.remove('new-added-card');
+					turn.addItem(this);
+					board.removeCard(this);
+				}
 			} else {
 				this.element.classList.add('new-added-card');
 				this.isNew = true;
@@ -63,7 +65,27 @@ class Card {
 			}
 		};
 
-		this.element.addEventListener('click', handleCardClick);
+		this.element.addEventListener('click', this._handleCardClick);
+	}
+
+	changeListenerToInHand(){
+		const turn = new Turn();
+		this.element.removeEventListener('click', this._handleCardClick);
+
+		this.playerHandParent = turn.player.element.querySelector('.player-cards-in-hand');
+
+		this.element.addEventListener('click', () => {
+			if (this.element.parentElement === this.playerHandParent) {
+				if(!turn.player.cardsInHand.some(card => card === this)) return;
+				if(!turn.canPlayerPurchaseCard(this)) return;
+				this.addToHand = false;
+				turn.addItem(this);
+				turn.player.removeCardInHand(this);
+			} else {
+				turn.removeItem(this);
+				turn.player.addCardInHand(this);
+			}
+		});
 	}
 }
 

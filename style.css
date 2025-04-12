@@ -40,9 +40,11 @@ body {
 .player-list {
 	display: flex;
 	flex-direction: column;
-	justify-content:space-around;
-	width: 100%;
+	justify-content: space-around;
+	gap: 1%;
+	width: 90%;
 	height: 100%;
+	margin: auto;
 	text-align: center;
 	position: relative;
 }
@@ -119,6 +121,10 @@ body {
     align-items: center;
     justify-content: center;
 	gap: 1%;
+}
+
+.player-cards-in-hand .card {
+	aspect-ratio: 1/1
 }
 
 .turn {
@@ -275,15 +281,26 @@ body {
 	animation: card-entry 1s ease-in-out forwards;
 }
 
-.cards-area .can-purchase, .token-area .can-purchase {
+.cards-area .can-purchase,
+.token-area .can-purchase,
+.player-stats.active .can-purchase {
     border: 3px solid rgba(76, 175, 80, 0.33);
     box-shadow: 0 0 20px 5px rgba(76, 175, 80); 
     transition: all 0.3s ease;
 }
 
-.cards-area .can-purchase:hover, .token-area .can-purchase:hover {
+.cards-area .can-purchase:hover,
+.token-area .can-purchase:hover, 
+.player-stats.active .can-purchase:hover {
     transform: scale(1.05);
     box-shadow: 0 0 30px 10px rgba(76, 175, 80);  
+}
+
+.player-stats.active {
+	background-color: #e8f5e9;
+	border: 2px solid #4CAF50; 
+	scale: 1.1;
+	transition: transform 0.3s ease;
 }
 
 .revers {
@@ -322,26 +339,20 @@ body {
 
 .cost-area {
 	display: flex;
-	justify-content: end;
-	flex-direction: column;
-	align-items: center;
 	position: absolute;
-	/* background-color: blueviolet; */
-	/* width: 20%; */
-	/* padding: 2%; */
-	gap: 3px;
-	margin: auto 3%;
+	justify-content: center;
+	gap: 1%;
 	bottom: 5%;
+	width: 100%;
 }
 
 .cost {
 	display: flex;
 	justify-content: center;
 	font-size: 1.4rem;
-	margin: 1% auto;
-	padding:  auto 5px;
 	border-radius: 50%;
-	aspect-ratio: 1/1;
+	width: 30px; 
+	aspect-ratio: 1/1;  
 }
 
 

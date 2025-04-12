@@ -23,7 +23,10 @@ class Player {
 
 	victoryPoint = 0;
 
+	static idCounter;
+
 	constructor(name) {
+		this.id = Player.idCounter++;
 		this.name = name;
 
 		this.generateElement();
@@ -34,6 +37,7 @@ class Player {
 			if (item instanceof Card) {
 				if(item.addToHand){
 					this.cardsInHand.push(item);
+					item.changeListenerToInHand();
 					return;
 				}
 				this.bonuses[item.gemType] += 1;
@@ -125,6 +129,16 @@ class Player {
 		const cardInHandElement = this.element.querySelector('.player-cards-in-hand');
 		cardInHandElement.innerHTML = '';
 		this.generateCardsInHand(cardInHandElement);
+	}
+
+	removeCardInHand(card){
+		this.cardsInHand = this.cardsInHand.filter(c => c.id !== card.id);
+		this.updateCardsInHand();
+	}
+
+	addCardInHand(item){
+		this.cardsInHand.push(item);
+		this.updateCardsInHand();
 	}
 }
 
