@@ -49,11 +49,12 @@ class Card {
 		const turn = new Turn();
 		const handleCardClick = () => {
 			if (this.element.parentElement === this.firstParent) {
-				if (turn.canAddItem(this)) {
-					this.element.classList.remove('new-added-card');
-					turn.addItem(this);
-					board.removeCard(this);
+				if (!turn.canAddItem(this)) {
+					this.addToHand = true;
 				}
+				this.element.classList.remove('new-added-card');
+				turn.addItem(this);
+				board.removeCard(this);
 			} else {
 				this.element.classList.add('new-added-card');
 				this.isNew = true;

@@ -32,6 +32,10 @@ class Player {
 	collectReward(items) {
 		items.forEach(item => {
 			if (item instanceof Card) {
+				if(item.addToHand){
+					this.cardsInHand.push(item);
+					return;
+				}
 				this.bonuses[item.gemType] += 1;
 				this.victoryPoint += item.victoryPoint;
 			} else if (item instanceof Token) {
@@ -46,6 +50,7 @@ class Player {
 		this.updateBonuses();
 		this.updateTokens();
 		this.updateVictoryPoints();
+		this.updateCardsInHand();
 	}
 
 	generateElement() {
@@ -114,6 +119,12 @@ class Player {
 		this.cardsInHand.forEach(card => {
 			cardInHandElement.appendChild(card.element);
 		});
+	}
+
+	updateCardsInHand() {
+		const cardInHandElement = this.element.querySelector('.player-cards-in-hand');
+		cardInHandElement.innerHTML = '';
+		this.generateCardsInHand(cardInHandElement);
 	}
 }
 

@@ -12,6 +12,9 @@ class PlayerManager {
     initializePlayers() {
 		this.players.push(new Player('Paweł'));
 		this.players.push(new Player('Test'));
+		this.players.push(new Player('Test'));
+		this.players.push(new Player('Test'));
+		this.players.push(new Player('Test'));
 	}
 
     getNextPlayer(){
