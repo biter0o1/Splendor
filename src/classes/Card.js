@@ -50,11 +50,12 @@ class Card {
 		const turn = new Turn();
 		this._handleCardClick = () => {
 			if (this.element.parentElement === this.firstParent) {
-				if (!turn.canPlayerPurchaseCard(this)) {
+				if (!turn.canPlayerPurchaseCard(this) && turn.items.length === 0) {
 					this.addToHand = true;
 					tokenManager.addTokenToTurn(TokenType.GOLD, true);
 				}
 				if (turn.canAddItem(this)) {
+					this.addToHand = false;
 					this.element.classList.remove('new-added-card');
 					turn.addItem(this);
 					board.removeCard(this);
