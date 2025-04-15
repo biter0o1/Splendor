@@ -1,0 +1,24 @@
+{
+	"name": "splendor",
+	"version": "1.0.0",
+	"description": "",
+	"main": "src/electron.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "electron ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/biter0o1/Splendor.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/biter0o1/Splendor/issues"
+	},
+	"homepage": "https://github.com/biter0o1/Splendor#readme",
+	"devDependencies": {
+		"electron": "^35.1.5"
+	}
+}
