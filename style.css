@@ -52,7 +52,9 @@ body {
 .player-stats {
 	display: flex;
 	flex-direction: column;
-	background-color: #7a7fb5;
+	background: linear-gradient(135deg, #7a7fb5, #5e6390);
+	border-radius: 12px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .player-text {
@@ -302,10 +304,11 @@ body {
 }
 
 .player-stats.active {
-	background-color: #e8f5e9;
-	border: 2px solid #4CAF50; 
-	scale: 1.1;
-	transition: transform 0.3s ease;
+	background: linear-gradient(135deg, #a8e6a3, #70c57a);
+	border: 2px solid #4CAF50;
+	transform: scale(1.05);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .revers {
@@ -413,6 +416,7 @@ body {
 	border-radius: 5px;
 	cursor: pointer;
 	z-index: 11;
+	display: none;
 }
 
 .show-turn-panel {
@@ -448,6 +452,10 @@ body {
 
 	.board {
 		width: 100%;
+	}
+
+	.show-turn-panel, .show-players-panel {
+		display: inline-block;
 	}
 
 	.left-panel, .right-panel {
