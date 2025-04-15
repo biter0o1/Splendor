@@ -1,5 +1,6 @@
 import TokenType from './TokenType.js';
 import Turn from './Turn.js';
+import Token from './Token.js';
 
 class Card {
 	constructor(id, victoryPoint, cost, gemType, lvl) {
@@ -55,7 +56,6 @@ class Card {
 					tokenManager.addTokenToTurn(TokenType.GOLD, true);
 				}
 				if (turn.canAddItem(this)) {
-					this.addToHand = false;
 					this.element.classList.remove('new-added-card');
 					turn.addItem(this);
 					board.removeCard(this);
@@ -63,6 +63,9 @@ class Card {
 			} else {
 				this.element.classList.add('new-added-card');
 				this.isNew = true;
+				if(turn.items.some(item => item instanceof Token && item.type == TokenType.GOLD)){
+					tokenManager.addToken(TokenType.GOLD);
+				}
 				turn.resetItems();
 				board.addCard(this);
 			}

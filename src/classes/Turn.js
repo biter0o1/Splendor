@@ -2,7 +2,6 @@ import Card from './Card.js';
 import Token from './Token.js';
 import TokenType from './TokenType.js';
 import PlayerManager from './PlayerManager.js';
-import Board from './Board.js';
 
 class Turn {
 	static _instance = null;

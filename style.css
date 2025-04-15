@@ -135,6 +135,12 @@ body {
 	position: relative;
 	display: flex;
     flex-direction: column;
+	color: white;
+	text-align: center;
+	background: linear-gradient(135deg, #7a7fb5, #5e6390);
+	border-radius: 12px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	padding: 1%;
 }
 
 .turn-items {
@@ -218,7 +224,6 @@ body {
 	align-items: center;
 	aspect-ratio: 1/1;
 	width: clamp(50px, 4vw, 80px);
-	min-width: 60px;
 	border-radius: 50%;
 	font-size: 3rem;
 }
@@ -266,7 +271,7 @@ body {
 .card {
 	position: relative;
 	background-color: lightblue;
-	width: clamp(150px, 20%, 400px);
+	width: clamp(120px, 20%, 400px);
 	aspect-ratio: 5 / 6;
 	border-radius: 5px;
 	border: 3px solid black;
@@ -398,6 +403,25 @@ body {
 	color: white;
 }
 
+.show-turn-panel, .show-players-panel {
+	position: absolute;
+	bottom: 0;
+	background-color: #007bff;
+	color: white;
+	padding: 8px 40px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	z-index: 11;
+}
+
+.show-turn-panel {
+	left: 0;
+}
+
+.show-players-panel {
+	right: 0;
+}
 
 @media (max-width: 1200px) {
     html {
@@ -407,11 +431,90 @@ body {
 
 @media (max-width: 992px) {
     html {
-        font-size: 14px;
+        font-size: 16px;
     }
 
 	.card{
 		aspect-ratio: 3/4;
+	}
+
+	.deck {
+		display: none;
+	}
+
+	.token-area {
+		width: 100%;
+	}
+
+	.board {
+		width: 100%;
+	}
+
+	.left-panel, .right-panel {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 50%;
+		opacity: 0;
+		pointer-events: none;
+		background-color: #f4f4f4;
+		transition: transform 0.3s ease, opacity 0.3s ease;
+		z-index: 10;
+	}
+	  
+	.left-panel {
+		left: 0;
+		transform: translateX(-100%);
+	}
+	  
+	.right-panel {
+		right: 0;
+		transform: translateX(100%);
+	}
+	  
+	.left-panel.open {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateX(0);
+	}
+	  
+	.right-panel.open {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateX(0);
+	}
+
+	.finish-turn-btn {
+		width: 40%;
+	}
+
+	.turn {
+		height: 50%;
+	}
+
+	.player-list {
+		font-size: 1.6rem;
+	}
+
+	.player-tokens, .player-bonuses {
+		gap: 0;
+	}
+
+	.player-token {
+		aspect-ratio: 1/1;
+        width: 25px;
+        height: 25px;
+		font-size: inherit;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	}
+
+	.player-bonus {
+		height: 25px;
+		font-size: inherit;
+	}
+
+	.card {
+		width: clamp(100px, 20%, 400px);
 	}
 }
 
@@ -429,11 +532,6 @@ body {
     html {
         font-size: 10px;
     }
-
-	.card{
-		aspect-ratio: 1/3;
-	}
-
 }
 
 @media (max-width: 400px) {

@@ -17,6 +17,7 @@ class Player {
 		[TokenType.GREEN]: 4,
 		[TokenType.RED]: 4,
 		[TokenType.BLACK]: 4,
+		[TokenType.GOLD]: 0,
 	};
 
 	cardsInHand = [];
@@ -51,6 +52,7 @@ class Player {
 	}
 
 	updateElement() {
+		console.log(this.cardsInHand);
 		this.updateBonuses();
 		this.updateTokens();
 		this.updateVictoryPoints();
