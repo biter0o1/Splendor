@@ -2,6 +2,7 @@ import Config from './Config.js';
 import TokenType from './TokenType.js';
 import Turn from './Turn.js';
 import Token from './Token.js';
+import Card from './Card.js';
 
 class TokenManager {
 	tokens = {
@@ -75,18 +76,23 @@ class TokenManager {
 
 		tokenElement.addEventListener('click', () => {
 			this.turn.removeItem(tokenObject);
+			this.turn.items.find(item => item instanceof Card && item.addToHand)?.element.click();
 			this.addToken(type);
 		});
 
         return tokenObject;
     }
 
-	handleTokenListener(type) {
+	addTokenToTurn(type, force = 0) {
         const tokenObject = this.createToken(type)
-        if(this.turn.canAddItem(tokenObject)){
+        if(this.turn.canAddItem(tokenObject) || force){
             this.turn.addItem(tokenObject);
             this.removeToken(type);
         }
+	}
+
+	handleTokenListener(type){
+		this.addTokenToTurn(type);
 	}
 
 	addToken(type) {

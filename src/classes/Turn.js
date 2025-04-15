@@ -57,6 +57,7 @@ class Turn {
 
 	resetItems() {
 		this.items = [];
+		this.reloadItems();
 	}
 
 	reloadItems() {
@@ -90,15 +91,23 @@ class Turn {
 	}
 
 	finishable() {
-		if (this.items.some(item => item instanceof Card)) {
-			return true;
-		}
-
 		const tokenCount = this.items.filter(item => item instanceof Token).length;
 
 		const duplicates = this.items.filter((ii, index, self) => self.filter(i => i.type === ii.type).length === 2);
 
 		const goldTokenCount = this.items.some(item => item.type === TokenType.GOLD);
+
+		const cards = this.items.filter(item => item instanceof Card);
+
+		if (cards.length === 1) {
+			if(cards.some(card => card.addToHand) && goldTokenCount){
+				return true;
+			}
+
+			if(cards.some(card => !card.addToHand)){
+				return true;
+			}
+		}
 
 		if (tokenCount === 2 && duplicates.length === 2) {
 			return true;
@@ -119,12 +128,14 @@ class Turn {
 		const cardCount = this.items.filter(i => i instanceof Card).length;
 
 		const tokenCount = this.items.filter(i => i instanceof Token).length;
+		const goldTokenCount = this.items.filter(i => i.type === TokenType.GOLD).length;
 
 		if (item instanceof Card) {
 			if (cardCount >= 1) {
 				return false;
 			}
-			if (tokenCount > 0) {
+			
+			if (tokenCount > 0 && !(tokenCount === 1 && goldTokenCount === 1)) {
 				return false;
 			}
 
@@ -139,11 +150,14 @@ class Turn {
 			}
 		} else if (item instanceof Token) {
 			const sameKeyTokenCount = this.items.filter(i => i.type === item.type).length;
-			const goldTokenCount = this.items.filter(i => i.type === TokenType.GOLD).length;
 
 			const duplicates = this.items.filter((ii, index, self) => self.filter(i => i.type === ii.type).length === 2);
 
 			if (cardCount > 0) {
+				return false;
+			}
+
+			if(item.type === TokenType.GOLD){
 				return false;
 			}
 

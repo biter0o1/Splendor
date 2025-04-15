@@ -51,7 +51,7 @@ class Board {
 		Object.values(this.cards).forEach(cardsByLvl => {
 			cardsByLvl.forEach(card => {
 				card.display();
-				card.addListener(this);
+				card.addListener(this, this.tokenManager);
 			});
 		});
 		this.turn.refresh();

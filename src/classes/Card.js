@@ -1,3 +1,4 @@
+import TokenType from './TokenType.js';
 import Turn from './Turn.js';
 
 class Card {
@@ -45,12 +46,13 @@ class Card {
 		this.firstParent.appendChild(this.element);
 	}
 
-	addListener(board) {
+	addListener(board, tokenManager) {
 		const turn = new Turn();
 		this._handleCardClick = () => {
 			if (this.element.parentElement === this.firstParent) {
 				if (!turn.canPlayerPurchaseCard(this)) {
 					this.addToHand = true;
+					tokenManager.addTokenToTurn(TokenType.GOLD, true);
 				}
 				if (turn.canAddItem(this)) {
 					this.element.classList.remove('new-added-card');
@@ -60,7 +62,7 @@ class Card {
 			} else {
 				this.element.classList.add('new-added-card');
 				this.isNew = true;
-				turn.removeItem(this);
+				turn.resetItems();
 				board.addCard(this);
 			}
 		};
