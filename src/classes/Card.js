@@ -15,6 +15,8 @@ class Card {
 		const template = document.querySelector('#card-template');
 		this.element = template.content.cloneNode(true).querySelector('.card');
 
+		this.element.classList.add('card-bg', `${this.gemType}-bg`);
+
 		this.element.querySelector('.points').textContent = this.victoryPoint;
 
 		this.element.querySelector('.gem').classList.add(this.gemType);
