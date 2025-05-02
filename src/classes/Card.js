@@ -19,7 +19,7 @@ class Card {
 
 		this.element.querySelector('.points').textContent = this.victoryPoint;
 
-		this.element.querySelector('.gem').classList.add(this.gemType);
+		this.element.querySelector('.gem').classList.add(`${this.gemType}-color`);
 
 		const costArea = this.element.querySelector('.cost-area');
 
@@ -29,7 +29,7 @@ class Card {
 			}
 
 			const costDiv = document.createElement('div');
-			costDiv.classList.add('cost', key);
+			costDiv.classList.add('cost', `${key}-color`);
 			costDiv.textContent = `${cost}`;
 			costArea.appendChild(costDiv);
 		});

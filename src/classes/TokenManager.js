@@ -32,7 +32,7 @@ class TokenManager {
 		this.tokenArea.innerHTML = '';
 		Object.entries(this.tokens).forEach(([type, value]) => {
 			const tokenDiv = document.createElement('div');
-			tokenDiv.classList.add('token', type);
+			tokenDiv.classList.add('token', type, `${type}-token-bg`);
 
 			tokenDiv.addEventListener('click', () => {
 				this.handleTokenListener(type);
@@ -75,7 +75,7 @@ class TokenManager {
 
     createToken(type){
 		const tokenElement = document.createElement('div');
-		tokenElement.classList.add('token', type);
+		tokenElement.classList.add('token', type, `${type}-token-bg`);
 		const icon = document.createElement('i');
 		icon.classList.add('fa-regular', 'fa-gem');
 		tokenElement.appendChild(icon);

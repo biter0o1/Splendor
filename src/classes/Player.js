@@ -82,7 +82,7 @@ class Player {
 	generateBonuses(bonusesElement) {
 		Object.entries(this.bonuses).forEach(([bonus, value]) => {
 			const div = document.createElement('div');
-			div.classList.add('player-bonus', bonus);
+			div.classList.add('player-bonus', `${bonus}-color`);
 			div.textContent = `${value}`;
 			bonusesElement.appendChild(div);
 		});
@@ -97,7 +97,7 @@ class Player {
 	generateTokens(tokensElement) {
 		Object.entries(this.tokens).forEach(([token, value]) => {
 			const div = document.createElement('div');
-			div.classList.add('player-token', token);
+			div.classList.add('player-token', token, `${token}-token-bg`);
 			div.textContent = `${value}`;
 			tokensElement.appendChild(div);
 		});

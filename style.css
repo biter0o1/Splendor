@@ -66,7 +66,7 @@ body {
 	background-size: 100% 100%;
 	background-position: center;
 	background-repeat: no-repeat;
-	transform: scale(0.8);
+	transform: scale(0.9);
 }
 
 .player-text {
@@ -117,9 +117,9 @@ body {
 
 .player-bonuses {
 	display: flex;
-	justify-content: center;
+	justify-content: end;
 	gap: 10px;
-	padding: 10px;
+	padding: 8px;
 }
 
 .player-bonus {
@@ -261,7 +261,7 @@ body {
 	aspect-ratio: 1/1;
 	width: clamp(50px, 4vw, 80px);
 	border-radius: 50%;
-	font-size: 3rem;
+	font-size: 2rem;
 }
 
 .token::after {
@@ -281,7 +281,7 @@ body {
 	right: -3%;
 	background-color: yellowgreen;
 	border-radius: 50%;
-	font-size: 0.5em;
+	font-size: 0.8em;
 	color: black;
 	display: flex;
 	justify-content: center;
@@ -324,6 +324,7 @@ body {
 	border: 3px solid black;
 	text-shadow: 1px 1px 2px black;
 	transition: all 0.3s ease;
+	color: #000000;
 }
 
 .card:not(.revers):hover {
@@ -402,8 +403,10 @@ body {
 }
 
 .gem {
-	font-size: 3rem;
+	font-size: 2rem;
+	padding: 8px;
 	position: absolute;
+	border: #000000 1px solid;
 	top: 3%;
 	right: 5%;
 	border-radius: 50%;
@@ -447,30 +450,54 @@ body {
 
 .red {
 	background-color: #d32f2f;
-	color: white;
 }
 
 .green {
 	background-color: #5ba260;
-	color: black;
 }
 
 .blue {
 	background-color: #1976d2;
-	color: white;
 }
 
 .white {
 	background-color: #ffffff;
-	color: black;
 }
 
 .gold {
 	background-color: #fbc02d;
-	color: black;
 }
 
 .black {
+	background-color: #392f2f;
+}
+
+.red-color {
+	background-color: #d32f2f;
+	color: white;
+}
+
+.green-color {
+	background-color: #5ba260;
+	color: black;
+}
+
+.blue-color {
+	background-color: #1976d2;
+	color: white;
+}
+
+.white-color {
+	background-color: #ffffff;
+	color: black;
+}
+
+.gold-color {
+	background-color: #fbc02d;
+	color: black;
+}
+
+.black-color {
 	background-color: #392f2f;
 	color: white;
 }
@@ -503,6 +530,54 @@ body {
 .card-bg {
 	background-size: 200% 200%;
 	animation: var(--pulse);
+}
+
+.red-token-bg {
+	background-image: url('assets/images/tokens/red_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.blue-token-bg {
+	background-image: url('assets/images/tokens/blue_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.black-token-bg {
+	background-image: url('assets/images/tokens/black_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.green-token-bg {
+	background-image: url('assets/images/tokens/green_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.white-token-bg {
+	background-image: url('assets/images/tokens/white_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.gold-token-bg {
+	background-image: url('assets/images/tokens/yellow_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
 }
 
 .new-added-card {
