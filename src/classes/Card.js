@@ -33,15 +33,17 @@ class Card {
 			costDiv.textContent = `${cost}`;
 			costArea.appendChild(costDiv);
 		});
-		
-		if(this.isNew){
+
+		if (this.isNew) {
 			this.element.classList.add('new-added-card');
 			const randomDelay = Math.random() * 0.3;
 
 			this.element.style.animationDelay = `${randomDelay}s`;
-		} else {
-			this.element.classList.remove('new-added-card');
 		}
+
+		this.element.addEventListener('animationend', () => {
+			this.element.classList.remove('new-added-card');
+		});
 
 		this.isNew = false;
 
@@ -65,7 +67,7 @@ class Card {
 			} else {
 				this.element.classList.add('new-added-card');
 				this.isNew = true;
-				if(turn.items.some(item => item instanceof Token && item.type == TokenType.GOLD)){
+				if (turn.items.some(item => item instanceof Token && item.type == TokenType.GOLD)) {
 					tokenManager.addToken(TokenType.GOLD);
 				}
 				turn.resetItems();
@@ -76,7 +78,7 @@ class Card {
 		this.element.addEventListener('click', this._handleCardClick);
 	}
 
-	changeListenerToInHand(){
+	changeListenerToInHand() {
 		const turn = new Turn();
 		this.element.removeEventListener('click', this._handleCardClick);
 
@@ -84,8 +86,8 @@ class Card {
 
 		this.element.addEventListener('click', () => {
 			if (this.element.parentElement === this.playerHandParent) {
-				if(!turn.player.cardsInHand.some(card => card === this)) return;
-				if(!turn.canPlayerPurchaseCard(this)) return;
+				if (!turn.player.cardsInHand.some(card => card === this)) return;
+				if (!turn.canPlayerPurchaseCard(this)) return;
 				this.addToHand = false;
 				turn.addItem(this);
 				turn.player.removeCardInHand(this);

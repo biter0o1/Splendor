@@ -43,6 +43,8 @@ class TokenManager {
 
 			tokenDiv.appendChild(icon);
 
+			this.animateFlash(tokenDiv);
+
 			const tokenCountDiv = document.createElement('div');
 			tokenCountDiv.classList.add('token-count');
 
@@ -52,6 +54,14 @@ class TokenManager {
 		});
 
 		this.turn.refresh();
+	}
+
+	animateFlash(tokenElement) {
+		const randomDelay = Math.random() * 3;
+		const randomDuration = Math.random() * 2 + 2;
+	
+		tokenElement.style.setProperty('--flash-delay', `${randomDelay}s`);
+		tokenElement.style.setProperty('--flash-duration', `${randomDuration}s`);
 	}
 
 	displayTokensCount() {

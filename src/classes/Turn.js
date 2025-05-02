@@ -226,7 +226,6 @@ class Turn {
 		const tokens = document.querySelectorAll('.token');
 		tokens.forEach(token => {
 			if (this.canAddItem(new Token(Date.now(), token.classList[1]))) {
-				//Date.now because we need unique id, its miliseconds, its no matter for this object
 				token.classList.add('can-purchase');
 			} else {
 				token.classList.remove('can-purchase');
