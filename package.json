@@ -5,7 +5,8 @@
 	"main": "src/electron.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "electron ."
+		"start": "electron .",
+		"dist": "electron-builder"
 	},
 	"repository": {
 		"type": "git",
@@ -17,8 +18,25 @@
 	"bugs": {
 		"url": "https://github.com/biter0o1/Splendor/issues"
 	},
+	"build": {
+		"appId": "com.biter0o1.splendor",
+		"productName": "Splendor",
+		"directories": {
+			"output": "dist"
+		},
+		"files": [
+			"src/**/*",
+			"index.html",
+			"package.json"
+		],
+		"win": {
+			"target": "portable",
+			"icon": "icon.ico"
+		}
+	},
 	"homepage": "https://github.com/biter0o1/Splendor#readme",
 	"devDependencies": {
-		"electron": "^35.1.5"
+		"electron": "^35.1.5",
+		"electron-builder": "^26.0.12"
 	}
 }

@@ -1,0 +1,770 @@
+:root {
+	--pulse: pulse-gradient 6s ease infinite;
+	--entry: card-entry 1s ease-in-out forwards;
+}
+
+* {
+	font-family: 'Roboto Mono', monospace;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	background: linear-gradient(to right, #74ebd5, #acb6e5);
+	font-size: 16px;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+	height: 100vh;
+}
+
+.left-panel {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 20%;
+	height: 100%;
+	flex-grow: 1;
+}
+
+.right-panel {
+	width: 20%;
+	height: 100%;
+	flex-grow: 1;
+}
+
+.player-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	gap: 1%;
+	width: 90%;
+	height: 100%;
+	margin: auto;
+	text-align: center;
+	position: relative;
+}
+
+.player-stats {
+	display: flex;
+	flex-direction: column;
+	/* background: linear-gradient(135deg, #7a7fb5, #5e6390); */
+	border-radius: 12px;
+	padding: 5%;
+	color: white;
+	background-image: url('../assets/images/tokenArea.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	transform: scale(0.9);
+}
+
+.player-text {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.player-text h1 {
+	font-size: 3rem;
+	font-weight: 900;
+	color: #fff8dc;
+	text-shadow: 2px 2px 2px rgba(0,0,0,0.4), -1px -1px 1px rgba(255,255,255,0.2);
+}
+
+.player-name {
+	display: inline;
+	font-size: 3rem;
+}
+
+.player-victory-points {
+	font-size: 3rem;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 10%;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.player-tokens {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	padding: 10px;
+}
+
+.player-token {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.4rem;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background-color: #ccc;
+	color: black;
+	font-weight: bold;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.player-bonuses {
+	display: flex;
+	justify-content: end;
+	gap: 10px;
+	padding: 8px;
+}
+
+.player-bonus {
+	width: 50px;
+	height: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 1.2rem;
+	border-radius: 10px;
+	color: white;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.player-cards-in-hand {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 1%;
+}
+
+.player-cards-in-hand .card {
+	aspect-ratio: 1/1;
+}
+
+.turn {
+	width: 100%;
+	height: 30%;
+	text-align: center;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	color: white;
+	text-align: center;
+	background-image: url('../assets/images/woodenArrow.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	padding: 3% 8%;
+}
+
+.turn h1 {
+	font-size: 3rem;
+	font-weight: 900;
+	color: #fff8dc;
+	text-shadow: 2px 2px 2px rgba(0,0,0,0.4), -1px -1px 1px rgba(255,255,255,0.2);
+}
+
+.turn-items {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+.finish-turn-btn {
+	position: absolute;
+	right: 5rem;
+	bottom: 3rem;
+	width: 20%;
+	height: 15%;
+	background: linear-gradient(135deg, #f9a825, #f57f17);
+	color: white;
+	font-size: 1.2rem;
+	font-weight: bold;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: transform 0.2s, background 0.3s;
+}
+
+.finish-turn-btn:hover {
+	background: linear-gradient(135deg, #fbc02d, #f57f17);
+	transform: scale(1.1);
+}
+
+.finish-turn-btn.finishable {
+	background: linear-gradient(135deg, #4caf50, #2e7d32);
+	box-shadow: 0 0 20px 10px rgba(76, 175, 80, 0.7);
+	transition: all 0.3s ease;
+}
+
+.finish-turn-btn.finishable:hover {
+	transform: scale(1.1);
+	box-shadow: 0 0 30px 15px rgba(76, 175, 80, 0.9);
+}
+
+.board {
+	display: flex;
+	flex-direction: column;
+	/* background-color: azure; */
+	width: 60%;
+	max-width: 1200px;
+	height: 100%;
+	border-radius: 5px;
+	/* margin: auto; */
+}
+
+.bottom-section {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	padding: 10%;
+	background-image: url('../assets/images/board.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.top-section {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	/* background-color: greenyellow; */
+	height: 20%;
+}
+
+.token-area {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 2%;
+	background-image: url('../assets/images/tokenArea.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 60%;
+	padding: 1%;
+}
+
+.token {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	aspect-ratio: 1/1;
+	width: clamp(50px, 4vw, 80px);
+	border-radius: 50%;
+	font-size: 2rem;
+}
+
+.token::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-radius: 50%;
+	animation: flash var(--flash-duration) ease-in-out infinite;
+	transform: translate(-50%, -50%);
+	animation-delay: var(--flash-delay);
+}
+
+.token-count {
+	position: absolute;
+	bottom: -3%;
+	right: -3%;
+	background-color: yellowgreen;
+	border-radius: 50%;
+	font-size: 0.8em;
+	color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 1.2em;
+	aspect-ratio: 1/1;
+}
+
+.deck {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	/* background-color: lightgoldenrodyellow; */
+	width: clamp(150px, 20%, 400px);
+	height: 100%;
+}
+
+.cards-area {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	/* background-color: rgb(86, 8, 8); */
+	width: 100%;
+	height: 100%;
+}
+
+.cards-area-lvl3,
+.cards-area-lvl2,
+.cards-area-lvl1 {
+	display: flex;
+	justify-content: space-around;
+}
+
+.card {
+	position: relative;
+	width: clamp(120px, 20%, 400px);
+	aspect-ratio: 5 / 6;
+	border-radius: 10px;
+	border: 3px solid black;
+	text-shadow: 1px 1px 2px black;
+	transition: all 0.3s ease;
+	color: #000000;
+}
+
+.card:not(.revers):hover {
+	transform: scale(1.05);
+}
+
+.card::before,
+.card::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 30%;
+	background-color: white;
+	opacity: 0.5;
+	left: 0;
+}
+
+.card::before {
+	top: 0;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	height: 40%;
+}
+
+.card::after {
+	bottom: 0;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.deck .card {
+	width: 90%;
+}
+
+.cards-area .can-purchase,
+.token-area .can-purchase,
+.player-stats.active .can-purchase {
+	border: 3px solid rgba(204, 153, 0, 0.5);
+	box-shadow: 0 0 10px 8px rgba(204, 153, 0, 0.8);
+	transition: all 0.3s ease;
+}
+
+.cards-area .can-purchase:hover,
+.token-area .can-purchase:hover,
+.player-stats.active .can-purchase:hover {
+	box-shadow: 0 0 30px 10px rgba(204, 153, 0, 1);
+}
+
+.player-stats.active {
+	background-image: url('../assets/images/woodenArrowLeft.png');
+	transform: scale(1.1);
+	/* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); */
+	transition: 0.5s ease;
+}
+
+.revers {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.6rem;
+}
+
+.count {
+	position: absolute;
+	top: -5%;
+	left: -5%;
+	background-color: yellowgreen;
+	padding: 2%;
+	border-radius: 50%;
+}
+
+.points {
+	font-size: 3rem;
+	position: absolute;
+	left: 5%;
+}
+
+.gem {
+	font-size: 2rem;
+	padding: 8px;
+	position: absolute;
+	border: #000000 1px solid;
+	top: 3%;
+	right: 5%;
+	border-radius: 50%;
+}
+
+.points,
+.gem {
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.cost-area {
+	display: flex;
+	position: absolute;
+	justify-content: center;
+	gap: 1%;
+	bottom: 5%;
+	width: 100%;
+	z-index: 1;
+}
+
+.cost {
+	display: flex;
+	justify-content: center;
+	font-size: 1.4rem;
+	border-radius: 50%;
+	width: 30px;
+	aspect-ratio: 1/1;
+}
+
+.lvl3 {
+	background-color: #8c4fd1;
+}
+
+.lvl2 {
+	background-color: #8fa832;
+}
+
+.lvl1 {
+	background-color: #1c9131;
+}
+
+.red {
+	background-color: #d32f2f;
+}
+
+.green {
+	background-color: #5ba260;
+}
+
+.blue {
+	background-color: #1976d2;
+}
+
+.white {
+	background-color: #ffffff;
+}
+
+.gold {
+	background-color: #fbc02d;
+}
+
+.black {
+	background-color: #392f2f;
+}
+
+.red-color {
+	background-color: #d32f2f;
+	color: white;
+}
+
+.green-color {
+	background-color: #5ba260;
+	color: black;
+}
+
+.blue-color {
+	background-color: #1976d2;
+	color: white;
+}
+
+.white-color {
+	background-color: #ffffff;
+	color: black;
+}
+
+.gold-color {
+	background-color: #fbc02d;
+	color: black;
+}
+
+.black-color {
+	background-color: #392f2f;
+	color: white;
+}
+
+.red-bg {
+	background: linear-gradient(270deg, #ff0000, #ff5252, #ff8a80, #ff0033, #993366, #824e58);
+	box-shadow: 0 0 25px rgba(255, 23, 68, 0.6);
+}
+
+.blue-bg {
+	background: linear-gradient(270deg, #0000ff, #2196f3, #00bcd4, #3f51b5, #5c6bc0, #1e88e5);
+	box-shadow: 0 0 25px rgba(33, 150, 243, 0.6);
+}
+
+.green-bg {
+	background: linear-gradient(270deg, #66bb6a, #2e7d32, #4caf50, #81c784, #388e3c, #426f47);
+	box-shadow: 0 0 25px rgba(76, 175, 80, 0.6);
+}
+
+.black-bg {
+	background: linear-gradient(270deg, #212121, #424242, #616161, #000000, #757575, #383838);
+	box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+.white-bg {
+	background: linear-gradient(270deg, #ffffff, #fafafa, #f0f0f0, #e0e0e0, #bdbdbd);
+	box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+
+.card-bg {
+	background-size: 200% 200%;
+	animation: var(--pulse);
+}
+
+.red-token-bg {
+	background-image: url('../assets/images/tokens/red_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.blue-token-bg {
+	background-image: url('../assets/images/tokens/blue_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.black-token-bg {
+	background-image: url('../assets/images/tokens/black_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.green-token-bg {
+	background-image: url('../assets/images/tokens/green_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.white-token-bg {
+	background-image: url('../assets/images/tokens/white_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.gold-token-bg {
+	background-image: url('../assets/images/tokens/yellow_to.png');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.new-added-card {
+	opacity: 0;
+	animation: var(--entry);
+}
+
+.show-turn-panel,
+.show-players-panel {
+	position: absolute;
+	bottom: 0;
+	background-color: #007bff;
+	color: white;
+	padding: 8px 40px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	z-index: 11;
+	display: none;
+}
+
+.show-turn-panel {
+	left: 0;
+}
+
+.show-players-panel {
+	right: 0;
+}
+
+@media (max-width: 1200px) {
+	html {
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 992px) {
+	html {
+		font-size: 16px;
+	}
+
+	.card {
+		aspect-ratio: 3/4;
+	}
+
+	.deck {
+		display: none;
+	}
+
+	.token-area {
+		width: 100%;
+	}
+
+	.board {
+		width: 100%;
+	}
+
+	.show-turn-panel,
+	.show-players-panel {
+		display: inline-block;
+	}
+
+	.left-panel,
+	.right-panel {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 50%;
+		opacity: 0;
+		pointer-events: none;
+		background-color: #f4f4f4;
+		transition: transform 0.3s ease, opacity 0.3s ease;
+		z-index: 10;
+	}
+
+	.left-panel {
+		left: 0;
+		transform: translateX(-100%);
+	}
+
+	.right-panel {
+		right: 0;
+		transform: translateX(100%);
+	}
+
+	.left-panel.open {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateX(0);
+	}
+
+	.right-panel.open {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateX(0);
+	}
+
+	.finish-turn-btn {
+		width: 40%;
+	}
+
+	.player-list {
+		font-size: 1.6rem;
+	}
+
+	.player-tokens,
+	.player-bonuses {
+		gap: 0;
+	}
+
+	.player-token {
+		aspect-ratio: 1/1;
+		width: 25px;
+		height: 25px;
+		font-size: inherit;
+		box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	}
+
+	.player-bonus {
+		height: 25px;
+		font-size: inherit;
+	}
+
+	.card {
+		width: clamp(100px, 20%, 400px);
+	}
+}
+
+@media (max-width: 768px) {
+	html {
+		font-size: 12px;
+	}
+
+	.card {
+		aspect-ratio: 2/3;
+	}
+}
+
+@media (max-width: 576px) {
+	html {
+		font-size: 10px;
+	}
+}
+
+@media (max-width: 400px) {
+	html {
+		font-size: 9px;
+	}
+}
+
+@keyframes pulse-gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes card-entry {
+	0% {
+		transform: translate(-30vw, 0);
+	}
+	50% {
+		transform: translate(0, 0);
+		scale: 1.2;
+		opacity: 1;
+	}
+	100% {
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes flash {
+	0% {
+		transform: translate(-50%, -50%) scale(0.5);
+		box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.3);
+	}
+	50% {
+		transform: translate(-50%, -50%) scale(1.5);
+		box-shadow: 0 0 15px 8px rgba(255, 255, 255, 1);
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(0.5);
+		box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.3);
+	}
+}
