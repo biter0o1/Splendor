@@ -25,8 +25,8 @@ class Turn {
 		this.placeCards();
 		this.player.collectReward(this.items);
 		this.resetItems();
-		this.refresh();
 		this.setPlayer(this.playerManager.getNextPlayer());
+		this.refresh();
 	}
 
 	setMethodTopPlaceCardOnBoard(placeCards) {
