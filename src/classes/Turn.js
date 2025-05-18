@@ -23,7 +23,7 @@ class Turn {
 		if (!this.finishable()) return;
 
 		this.placeCards();
-		this.player.collectReward(this.items);
+		this.player.collectReward(this.items, this.tokenManager);
 		this.resetItems();
 		this.setPlayer(this.playerManager.getNextPlayer());
 		this.refresh();
@@ -34,10 +34,14 @@ class Turn {
 	}
 
 	setPlayer(player) {
-		this.player?.element.classList.remove('active')
+		this.player?.element.classList.remove('active');
 		this.player = player;
-		this.player.element.classList.add('active')
+		this.player.element.classList.add('active');
 		this.reloadItems();
+	}
+
+	setTokenManager(tokenManager) {
+		this.tokenManager = tokenManager;
 	}
 
 	addItem(item) {
@@ -99,11 +103,11 @@ class Turn {
 		const cards = this.items.filter(item => item instanceof Card);
 
 		if (cards.length === 1) {
-			if(cards.some(card => card.addToHand) && goldTokenCount){
+			if (cards.some(card => card.addToHand) && goldTokenCount) {
 				return true;
 			}
 
-			if(cards.some(card => !card.addToHand)){
+			if (cards.some(card => !card.addToHand)) {
 				return true;
 			}
 		}
@@ -133,13 +137,13 @@ class Turn {
 			if (cardCount >= 1) {
 				return false;
 			}
-			
+
 			if (tokenCount > 0 && !(tokenCount === 1 && goldTokenCount === 1)) {
 				return false;
 			}
 
-			if(item.addToHand){
-				if(this.player.cardsInHand.length < 3){
+			if (item.addToHand) {
+				if (this.player.cardsInHand.length < 3) {
 					return true;
 				}
 			}
@@ -156,7 +160,7 @@ class Turn {
 				return false;
 			}
 
-			if(item.type === TokenType.GOLD){
+			if (item.type === TokenType.GOLD) {
 				return false;
 			}
 
@@ -214,12 +218,12 @@ class Turn {
 
 	refreshCardCanPurchaseInHand() {
 		Object.values(this.player.cardsInHand).forEach(card => {
-				if (this.canPlayerPurchaseCard(card)) {
-					card.element.classList.add('can-purchase');
-				} else {
-					card.element.classList.remove('can-purchase');
-				}
-			});
+			if (this.canPlayerPurchaseCard(card)) {
+				card.element.classList.add('can-purchase');
+			} else {
+				card.element.classList.remove('can-purchase');
+			}
+		});
 	}
 
 	refreshTokenCanPurchase() {
@@ -233,7 +237,7 @@ class Turn {
 		});
 	}
 
-	refresh(){
+	refresh() {
 		this.refreshCardCanPurchase();
 		this.refreshCardCanPurchaseInHand();
 		this.refreshTokenCanPurchase();

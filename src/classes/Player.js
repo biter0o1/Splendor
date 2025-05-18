@@ -33,17 +33,17 @@ class Player {
 		this.generateElement();
 	}
 
-	collectReward(items) {
+	collectReward(items, tokenManager) {
 		items.forEach(item => {
 			if (item instanceof Card) {
-				if(item.addToHand){
+				if (item.addToHand) {
 					this.cardsInHand.push(item);
 					item.changeListenerToInHand();
 					return;
 				}
 				this.bonuses[item.gemType] += 1;
 				this.victoryPoint += item.victoryPoint;
-				this.removeTokens(item);
+				this.moveTokensFromPlayerToBoard(item, tokenManager);
 			} else if (item instanceof Token) {
 				this.tokens[item.type] += 1;
 			}
@@ -52,35 +52,44 @@ class Player {
 		this.updateElement();
 	}
 
-removeTokens(card) {
-	const cost = card.cost;
+	moveTokensFromPlayerToBoard(card, tokenManager) {
+		const cost = card.cost;
 
-	const requiredTokens = {};
+		const requiredTokens = {};
+		const usedTokens = {};
 
-	Object.keys(cost).forEach(type => {
-		const remainingCost = cost[type] - (this.bonuses[type] || 0);
+		Object.keys(cost).forEach(type => {
+			const remainingCost = cost[type] - (this.bonuses[type] || 0);
+			requiredTokens[type] = Math.max(0, remainingCost);
+		});
 
-		requiredTokens[type] = Math.max(0, remainingCost);
-	});
+		for (const [type, amountNeeded] of Object.entries(requiredTokens)) {
+			let toPay = amountNeeded;
 
-	for (const [type, amountNeeded] of Object.entries(requiredTokens)) {
-		let toPay = amountNeeded;
+			if (this.tokens[type] >= toPay) {
+				this.tokens[type] -= toPay;
+				usedTokens[type] = (usedTokens[type] || 0) + toPay;
+			} else {
+				const available = this.tokens[type];
+				this.tokens[type] = 0;
+				usedTokens[type] = (usedTokens[type] || 0) + available;
+				toPay -= available;
 
-		if (this.tokens[type] >= toPay) {
-			this.tokens[type] -= toPay;
-		} else {
-			const available = this.tokens[type];
-			this.tokens[type] = 0;
-			toPay -= available;
-
-			if (this.tokens[TokenType.GOLD] >= toPay) {
-				this.tokens[TokenType.GOLD] -= toPay;
+				if (this.tokens[TokenType.GOLD] >= toPay) {
+					this.tokens[TokenType.GOLD] -= toPay;
+					usedTokens[TokenType.GOLD] = (usedTokens[TokenType.GOLD] || 0) + toPay;
+				}
 			}
 		}
-	}
 
-	this.updateTokens();
-}
+		for (const [type, count] of Object.entries(usedTokens)) {
+			for (let i = 0; i < count; i++) {
+				tokenManager.addToken(type);
+			}
+		}
+
+		this.updateTokens();
+	}
 
 	updateElement() {
 		this.updateBonuses();
@@ -142,10 +151,10 @@ removeTokens(card) {
 	updateVictoryPoints() {
 		const victoryPoints = this.element.querySelector('.player-victory-points');
 		if (this.victoryPoint >= 5 && this.victoryPoint < 10) {
-            victoryPoints.classList.remove('blue');
+			victoryPoints.classList.remove('blue');
 			victoryPoints.classList.add('gold');
 		} else if (this.victoryPoint >= 10) {
-            victoryPoints.classList.remove('gold');
+			victoryPoints.classList.remove('gold');
 			victoryPoints.classList.add('green');
 		}
 		victoryPoints.textContent = this.victoryPoint;
@@ -163,12 +172,12 @@ removeTokens(card) {
 		this.generateCardsInHand(cardInHandElement);
 	}
 
-	removeCardInHand(card){
+	removeCardInHand(card) {
 		this.cardsInHand = this.cardsInHand.filter(c => c.id !== card.id);
 		this.updateCardsInHand();
 	}
 
-	addCardInHand(item){
+	addCardInHand(item) {
 		this.cardsInHand.push(item);
 		this.updateCardsInHand();
 	}

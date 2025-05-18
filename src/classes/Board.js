@@ -14,11 +14,12 @@ class Board {
 		this.turn = new Turn(); //Singleton
 		this.turn.setCardsOnBoard(this.cards);
 		this.turn.setMethodTopPlaceCardOnBoard(this.placeCards.bind(this));
+		this.tokenManager = new TokenManager();
+		this.turn.setTokenManager(this.tokenManager);
 		this.init();
 	}
 
 	async init() {
-		this.tokenManager = new TokenManager();
 		this.deck = new Deck();
 		await this.deck.init();
 		this.placeCards();
