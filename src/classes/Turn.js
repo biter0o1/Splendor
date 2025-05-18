@@ -110,6 +110,10 @@ class Turn {
 			if (cards.some(card => !card.addToHand)) {
 				return true;
 			}
+
+			if (tokenCount === 1 && goldTokenCount) {
+				return true;
+			}
 		}
 
 		if (tokenCount === 2 && duplicates.length === 2) {
@@ -117,10 +121,6 @@ class Turn {
 		}
 
 		if (tokenCount === 3 && duplicates.length === 0) {
-			return true;
-		}
-
-		if (tokenCount === 1 && goldTokenCount) {
 			return true;
 		}
 
@@ -193,15 +193,22 @@ class Turn {
 	}
 
 	canPlayerPurchaseCard(card) {
-		let ret = true;
+		let gold = this.player.tokens[TokenType.GOLD];
 		for (let [type, value] of Object.entries(card.cost)) {
-			let playerTokensAndBonuses = this.player.tokens[type] + this.player.bonuses[type];
-			if (playerTokensAndBonuses < value) {
-				ret = false;
+			const tokens = this.player.tokens[type] || 0;
+			const bonuses = this.player.bonuses[type] || 0;
+			const combined = tokens + bonuses;
+
+			if (combined < value) {
+				const missing = value - combined;
+				if (gold >= missing) {
+					gold -= missing;
+				} else {
+					return false;
+				}
 			}
 		}
-
-		return ret;
+		return true;
 	}
 
 	refreshCardCanPurchase() {
