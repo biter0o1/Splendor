@@ -33,6 +33,9 @@ class TokenManager {
 		Object.entries(this.tokens).forEach(([type, value]) => {
 			const tokenDiv = document.createElement('div');
 			tokenDiv.classList.add('token', type, `${type}-token-bg`);
+			if(value <= 0){
+				tokenDiv.classList.add('token-invisible');
+			}
 
 			tokenDiv.addEventListener('click', () => {
 				this.handleTokenListener(type);

@@ -317,6 +317,10 @@ body {
 	aspect-ratio: 1/1;
 }
 
+.token-invisible {
+	visibility: hidden;
+}
+
 .deck {
 	display: flex;
 	flex-direction: column;
