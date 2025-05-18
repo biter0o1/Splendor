@@ -70,6 +70,7 @@ class Card {
 				if (turn.items.some(item => item instanceof Token && item.type == TokenType.GOLD)) {
 					tokenManager.addToken(TokenType.GOLD);
 				}
+				this.addToHand = false;
 				turn.resetItems();
 				board.addCard(this);
 			}
