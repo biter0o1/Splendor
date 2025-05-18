@@ -2,6 +2,7 @@ import Card from './Card.js';
 import Token from './Token.js';
 import TokenType from './TokenType.js';
 import PlayerManager from './PlayerManager.js';
+import Config from './Config.js';
 
 class Turn {
 	static _instance = null;
@@ -143,7 +144,7 @@ class Turn {
 			}
 
 			if (item.addToHand) {
-				if (this.player.cardsInHand.length < 3) {
+				if (this.player.cardsInHand.length < Config.MAX_CARDS_IN_HAND) {
 					return true;
 				}
 			}

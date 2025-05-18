@@ -1,6 +1,7 @@
 import TokenType from './TokenType.js';
 import Turn from './Turn.js';
 import Token from './Token.js';
+import Config from './Config.js';
 
 class Card {
 	constructor(id, victoryPoint, cost, gemType, lvl) {
@@ -55,7 +56,7 @@ class Card {
 		const turn = new Turn();
 		this._handleCardClick = () => {
 			if (this.element.parentElement === this.firstParent) {
-				if (!turn.canPlayerPurchaseCard(this) && turn.items.length === 0) {
+				if (!turn.canPlayerPurchaseCard(this) && turn.items.length === 0 && turn.player.cardsInHand.length < Config.MAX_CARDS_IN_HAND) {
 					this.addToHand = true;
 					tokenManager.addTokenToTurn(TokenType.GOLD, true);
 				}
