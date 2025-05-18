@@ -7,16 +7,16 @@ class Player {
 		[TokenType.WHITE]: 0,
 		[TokenType.BLUE]: 0,
 		[TokenType.GREEN]: 0,
-		[TokenType.RED]: 1,
+		[TokenType.RED]: 0,
 		[TokenType.BLACK]: 0,
 	};
 
 	tokens = {
-		[TokenType.WHITE]: 4,
-		[TokenType.BLUE]: 4,
-		[TokenType.GREEN]: 4,
-		[TokenType.RED]: 4,
-		[TokenType.BLACK]: 4,
+		[TokenType.WHITE]: 0,
+		[TokenType.BLUE]: 0,
+		[TokenType.GREEN]: 0,
+		[TokenType.RED]: 0,
+		[TokenType.BLACK]: 0,
 		[TokenType.GOLD]: 0,
 	};
 
