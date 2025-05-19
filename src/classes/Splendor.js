@@ -15,9 +15,16 @@ class Splendor {
 
 	initAudio() {
 		const musicBtn = document.querySelector('#music-toggle');
+		const musicIcon = musicBtn.querySelector('i');
 		musicBtn.addEventListener('click', () => {
 			this.audioManager.toggleMusic();
-			musicBtn.textContent = this.audioManager.musicEnabled ? '🔊' : '🔇';
+			if (this.audioManager.musicEnabled) {
+				musicIcon.classList.remove('fa-volume-xmark');
+				musicIcon.classList.add('fa-volume-high');
+			} else {
+				musicIcon.classList.remove('fa-volume-high');
+				musicIcon.classList.add('fa-volume-xmark');
+			}
 		});
 	}
 

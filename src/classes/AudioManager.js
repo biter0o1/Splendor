@@ -1,5 +1,5 @@
 class AudioManager {
-	musicEnabled = true;
+	musicEnabled = false;
 
 	constructor() {
 		this.music = new Audio('assets/audio/mario.mp3');
@@ -15,6 +15,7 @@ class AudioManager {
 		}
 		this.musicEnabled = !this.musicEnabled;
 	}
+
 }
 
 export default AudioManager;
