@@ -1,4 +1,5 @@
 import Board from './Board.js';
+import AudioManager from './AudioManager.js';
 
 class Splendor {
 	constructor() {
@@ -6,12 +7,21 @@ class Splendor {
 	}
 
 	init() {
+		this.audioManager = new AudioManager();
 		this.board = new Board();
 		this.addListenerToPanelBtn();
+		this.initAudio();
 	}
 
-	addListenerToPanelBtn(){
+	initAudio() {
+		const musicBtn = document.querySelector('#music-toggle');
+		musicBtn.addEventListener('click', () => {
+			this.audioManager.toggleMusic();
+			musicBtn.textContent = this.audioManager.musicEnabled ? '🔊' : '🔇';
+		});
+	}
 
+	addListenerToPanelBtn() {
 		const showTurnPanelBtn = document.querySelector('#show-turn-panel');
 		const showPlayersPanelBtn = document.querySelector('#show-players-panel');
 		const turnPanel = document.querySelector('.left-panel');
